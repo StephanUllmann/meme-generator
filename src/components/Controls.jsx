@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Grid, InputLabel } from "@mui/material";
+import { Box, TextField, Button, Grid } from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
