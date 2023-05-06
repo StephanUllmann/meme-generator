@@ -1,4 +1,4 @@
-import { Box, TextField, Button, Grid } from "@mui/material";
+import { Box, TextField, Button, Grid, Slider } from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
@@ -15,6 +15,22 @@ export default function Controls() {
     setImageURL,
     randomMeme,
     textTop,
+    defaultTextSize,
+    setTopTextSize,
+    setBottomTextSize,
+    bottomTextSize,
+    topTextSize,
+    ttx,
+    tty,
+    tbx,
+    tby,
+    setTBX,
+    setTBY,
+    setTTX,
+    setTTY,
+    defaultX,
+    defaultTopY,
+    defaultBottomY,
   } = useContext(MemeContext);
 
   const textTopEl = document.getElementById("text-top");
@@ -40,9 +56,15 @@ export default function Controls() {
     setImageURL(null);
     setRandomizeMeme(true);
     setTextTop("");
+    setTopTextSize(defaultTextSize);
+    setBottomTextSize(defaultTextSize);
     setTextBottom("");
     textTopEl.value = "";
     textBottomEl.value = "";
+    setTTX(defaultX);
+    setTTY(defaultTopY);
+    setTBX(defaultX);
+    setTBY(defaultBottomY);
   };
 
   const handleFileInput = (newFile) => setFile(newFile);
@@ -51,6 +73,17 @@ export default function Controls() {
     domtoimage.toBlob(document.getElementById("meme")).then(function (blob) {
       saveAs(blob, `${fileName}.png`);
     });
+  };
+
+  const handleSlider = (e) => {
+    const slider = e.target.name;
+    const value = e.target.value;
+    if (slider === "text-top-size") setTopTextSize(value);
+    if (slider === "text-bottom-size") setBottomTextSize(value);
+    if (slider === "text-top-posX") setTTX(value);
+    if (slider === "text-top-posY") setTTY(value);
+    if (slider === "text-bottom-posX") setTBX(value);
+    if (slider === "text-bottom-posY") setTBY(value);
   };
 
   return (
@@ -64,27 +97,117 @@ export default function Controls() {
           noValidate
           autoComplete="off"
         >
-          <div>
-            <TextField
-              label="Text Top"
-              id="text-top"
-              onChange={handleInput}
-              // multiline
-              maxRows={4}
-              onKeyDown={handleKeydown}
-              color="success"
-            />
-          </div>
-          <div>
-            <TextField
-              label="Text Bottom"
-              id="text-bottom"
-              onChange={handleInput}
-              // multiline
-              maxRows={4}
-              onKeyDown={handleKeydown}
-            />
-          </div>
+          <Grid container marginBottom={5}>
+            <Grid item>
+              <TextField
+                label="Text Top"
+                id="text-top"
+                onChange={handleInput}
+                // multiline
+                maxRows={4}
+                onKeyDown={handleKeydown}
+                color="success"
+              />
+            </Grid>
+            <Grid item width={100}>
+              <Slider
+                label="size"
+                aria-label="Temperature"
+                value={topTextSize}
+                // getAriaValueText="something"
+                color="success"
+                id="text-top-size"
+                name="text-top-size"
+                onChange={handleSlider}
+              />
+              <Slider
+                label="Position-X"
+                aria-label="Temperature"
+                value={ttx}
+                // getAriaValueText="something"
+                color="warning"
+                id="text-top-posX"
+                name="text-top-posX"
+                onChange={handleSlider}
+              />
+            </Grid>
+            <Grid item>
+              <Slider
+                label="Position-Y"
+                sx={{
+                  '& input[type="range"]': {
+                    WebkitAppearance: "slider-vertical",
+                  },
+                }}
+                orientation="vertical"
+                // defaultValue={tty}
+                value={tty}
+                aria-label="Temperature"
+                // valueLabelDisplay="auto"
+                color="error"
+                id="text-top-posY"
+                name="text-top-posY"
+                onChange={handleSlider}
+                max={95}
+
+                // onKeyDown={preventHorizontalKeyboardNavigation}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container marginBottom={5}>
+            <Grid item>
+              <TextField
+                label="Text Bottom"
+                id="text-bottom"
+                onChange={handleInput}
+                // multiline
+                maxRows={4}
+                onKeyDown={handleKeydown}
+              />
+            </Grid>
+            <Grid item width={100}>
+              <Slider
+                aria-label="Temperature"
+                value={bottomTextSize}
+                // getAriaValueText="something"
+                // color="secondary"
+                id="text-bottom-size"
+                name="text-bottom-size"
+                onChange={handleSlider}
+              />
+              <Slider
+                label="Position-X"
+                aria-label="Temperature"
+                value={tbx}
+                // getAriaValueText="something"
+                color="warning"
+                id="text-bottom-posX"
+                name="text-bottom-posX"
+                onChange={handleSlider}
+              />
+            </Grid>
+            <Grid item>
+              <Slider
+                label="Position-Y"
+                sx={{
+                  '& input[type="range"]': {
+                    WebkitAppearance: "slider-vertical",
+                  },
+                }}
+                orientation="vertical"
+                value={tby}
+                aria-label="Temperature"
+                valueLabelDisplay="auto"
+                color="error"
+                id="text-bottom-posY"
+                name="text-bottom-posY"
+                onChange={handleSlider}
+                max={95}
+                // onKeyDown={preventHorizontalKeyboardNavigation}
+              />
+            </Grid>
+          </Grid>
         </Box>
       </Grid>
       <Grid item>

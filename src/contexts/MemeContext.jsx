@@ -4,6 +4,8 @@ import { fetchData } from "../client";
 export const MemeContext = createContext();
 
 export default function MemeContextProvider({ children }) {
+  const defaultTextSize = 30;
+
   const [memeArr, setMemeArr] = useState([]);
   const [randomMeme, setRandomMeme] = useState("");
   const [randomizeMeme, setRandomizeMeme] = useState(false);
@@ -11,6 +13,17 @@ export default function MemeContextProvider({ children }) {
   const [textBottom, setTextBottom] = useState("");
   const [file, setFile] = useState(null);
   const [imageURL, setImageURL] = useState(null);
+  const [topTextSize, setTopTextSize] = useState(defaultTextSize);
+  const [bottomTextSize, setBottomTextSize] = useState(defaultTextSize);
+  // Test Position
+  const defaultX = 50;
+  const defaultTopY = 85;
+  const defaultBottomY = 5;
+
+  const [ttx, setTTX] = useState(defaultX);
+  const [tty, setTTY] = useState(defaultTopY);
+  const [tbx, setTBX] = useState(defaultX);
+  const [tby, setTBY] = useState(defaultBottomY);
 
   const loadNewMemes = () => {
     fetchData("https://api.imgflip.com/get_memes")
@@ -22,7 +35,7 @@ export default function MemeContextProvider({ children }) {
         if (!data.success) throw new Error("no success");
       })
       .catch((err) => console.log(err));
-    console.log("new content loaded");
+    // console.log("new content loaded");
   };
 
   useEffect(() => {
@@ -33,7 +46,7 @@ export default function MemeContextProvider({ children }) {
     if (Math.random() < 0.05) loadNewMemes();
     else if (randomizeMeme) {
       const randomIndex = Math.floor(Math.random() * memeArr.length);
-      console.log(randomIndex);
+      // console.log(randomIndex);
       setRandomMeme(memeArr[randomIndex]);
     }
     setRandomizeMeme(false);
@@ -45,7 +58,7 @@ export default function MemeContextProvider({ children }) {
     }
   }, [file]);
 
-  console.log(randomMeme);
+  // console.log(randomMeme);
   return (
     <MemeContext.Provider
       value={{
@@ -60,6 +73,22 @@ export default function MemeContextProvider({ children }) {
         setFile,
         imageURL,
         setImageURL,
+        topTextSize,
+        setTopTextSize,
+        bottomTextSize,
+        setBottomTextSize,
+        defaultTextSize,
+        ttx,
+        tty,
+        tbx,
+        tby,
+        setTBX,
+        setTBY,
+        setTTX,
+        setTTY,
+        defaultX,
+        defaultTopY,
+        defaultBottomY,
       }}
     >
       {children}

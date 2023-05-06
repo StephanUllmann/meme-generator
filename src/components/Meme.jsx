@@ -4,8 +4,19 @@ import { MemeContext } from "../contexts/MemeContext";
 import { Card, CardMedia, Typography } from "@mui/material";
 
 export default function Meme() {
-  const { randomMeme, textTop, textBottom, file, imageURL } =
-    useContext(MemeContext);
+  const {
+    randomMeme,
+    textTop,
+    textBottom,
+    file,
+    imageURL,
+    topTextSize,
+    bottomTextSize,
+    ttx,
+    tty,
+    tbx,
+    tby,
+  } = useContext(MemeContext);
 
   const url = imageURL || randomMeme.url;
   const name = file?.name || randomMeme.name;
@@ -25,20 +36,20 @@ export default function Meme() {
       <Typography
         sx={{
           position: "absolute",
-          top: 15,
+          bottom: `${tty}%`,
           textTransform: "uppercase",
           color: "white",
           textShadow:
-            "1px 1px 0 black, -1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black",
-          left: "50%",
+            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+          left: `${ttx}%`,
           transform: "translateX(-50%)",
           textAlign: "center",
-          fontSize:
-            imgWidth / imgHeight > 0.75
-              ? 27.5
-              : imgWidth / imgHeight > 0.5
-              ? (imgWidth / imgHeight) * 45
-              : (imgWidth / imgHeight) * 100,
+          fontSize: topTextSize,
+          // imgWidth / imgHeight > 0.75
+          //   ? 27.5
+          //   : imgWidth / imgHeight > 0.5
+          //   ? (imgWidth / imgHeight) * 45
+          //   : (imgWidth / imgHeight) * 100,
           maxWidth: 485,
           // backgroundColor: "#eeeeee55",
         }}
@@ -63,21 +74,22 @@ export default function Meme() {
       <Typography
         sx={{
           position: "absolute",
-          bottom: 15,
+          bottom: `${tby}%`,
+
           textTransform: "uppercase",
           color: "white",
           textShadow:
-            "1px 1px 0 black, -1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black",
-          left: "50%",
+            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+          left: `${tbx}%`,
           transform: "translateX(-50%)",
           textAlign: "center",
           // fontSize: 27.5,
-          fontSize:
-            imgWidth / imgHeight > 0.75
-              ? 27.5
-              : imgWidth / imgHeight > 0.5
-              ? (imgWidth / imgHeight) * 45
-              : (imgWidth / imgHeight) * 100,
+          fontSize: bottomTextSize,
+          // imgWidth / imgHeight > 0.75
+          //   ? 27.5
+          //   : imgWidth / imgHeight > 0.5
+          //   ? (imgWidth / imgHeight) * 45
+          //   : (imgWidth / imgHeight) * 100,
           maxWidth: 485,
           // backgroundColor: "#eeeeee55",
         }}
