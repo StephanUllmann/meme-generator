@@ -16,6 +16,13 @@ export default function Meme() {
     tty,
     tbx,
     tby,
+    colorTop,
+    colorMiddle,
+    colorBottom,
+    middleTextSize,
+    tmx,
+    tmy,
+    textMiddle,
   } = useContext(MemeContext);
 
   const url = imageURL || randomMeme.url;
@@ -33,12 +40,24 @@ export default function Meme() {
 
   return (
     <Card sx={{ position: "relative" }} id="meme">
+      <CardMedia
+        sx={{
+          alignSelf: "center",
+          // height: 600,
+          width: 400,
+          display: "block",
+          aspectRatio: `${imgWidth} / ${imgHeight}`,
+        }}
+        // className="Meme"
+        image={url}
+        title={name}
+      />
       <Typography
         sx={{
           position: "absolute",
           bottom: `${tty}%`,
           textTransform: "uppercase",
-          color: "white",
+          color: colorTop,
           textShadow:
             "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
           left: `${ttx}%`,
@@ -59,25 +78,41 @@ export default function Meme() {
         {/* <pre>{textTop}</pre> */}
         {textTop}
       </Typography>
-      <CardMedia
+
+      <Typography
         sx={{
-          alignSelf: "center",
-          // height: 600,
-          width: 400,
-          display: "block",
-          aspectRatio: `${imgWidth} / ${imgHeight}`,
+          position: "absolute",
+          bottom: `${tmy}%`,
+          textTransform: "uppercase",
+          color: colorMiddle,
+          textShadow:
+            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+          left: `${tmx}%`,
+          transform: "translateX(-50%)",
+          textAlign: "center",
+          fontSize: middleTextSize,
+          // imgWidth / imgHeight > 0.75
+          //   ? 27.5
+          //   : imgWidth / imgHeight > 0.5
+          //   ? (imgWidth / imgHeight) * 45
+          //   : (imgWidth / imgHeight) * 100,
+          maxWidth: 485,
+          // backgroundColor: "#eeeeee55",
         }}
-        // className="Meme"
-        image={url}
-        title={name}
-      />
+        variant="h2"
+        fontFamily={"Oswald"}
+      >
+        {/* <pre>{textTop}</pre> */}
+        {textMiddle}
+      </Typography>
+
       <Typography
         sx={{
           position: "absolute",
           bottom: `${tby}%`,
 
           textTransform: "uppercase",
-          color: "white",
+          color: colorBottom,
           textShadow:
             "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
           left: `${tbx}%`,

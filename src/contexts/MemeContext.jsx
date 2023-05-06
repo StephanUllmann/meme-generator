@@ -10,20 +10,33 @@ export default function MemeContextProvider({ children }) {
   const [randomMeme, setRandomMeme] = useState("");
   const [randomizeMeme, setRandomizeMeme] = useState(false);
   const [textTop, setTextTop] = useState("");
+  const [textMiddle, setTextMiddle] = useState("");
+
   const [textBottom, setTextBottom] = useState("");
   const [file, setFile] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const [topTextSize, setTopTextSize] = useState(defaultTextSize);
+  const [middleTextSize, setMiddleTextSize] = useState(defaultTextSize);
   const [bottomTextSize, setBottomTextSize] = useState(defaultTextSize);
-  // Test Position
+  // Text Position
   const defaultX = 50;
   const defaultTopY = 85;
   const defaultBottomY = 5;
+  const defaultMiddleY = 50;
 
   const [ttx, setTTX] = useState(defaultX);
   const [tty, setTTY] = useState(defaultTopY);
+  const [tmx, setTMX] = useState(defaultX);
+  const [tmy, setTMY] = useState(defaultMiddleY);
+
   const [tbx, setTBX] = useState(defaultX);
   const [tby, setTBY] = useState(defaultBottomY);
+
+  // Color
+  const defaultColor = "#fff";
+  const [colorTop, setColorTop] = useState(defaultColor);
+  const [colorMiddle, setColorMiddle] = useState(defaultColor);
+  const [colorBottom, setColorBottom] = useState(defaultColor);
 
   const loadNewMemes = () => {
     fetchData("https://api.imgflip.com/get_memes")
@@ -89,6 +102,22 @@ export default function MemeContextProvider({ children }) {
         defaultX,
         defaultTopY,
         defaultBottomY,
+        defaultColor,
+        colorTop,
+        setColorTop,
+        colorMiddle,
+        setColorMiddle,
+        colorBottom,
+        setColorBottom,
+        middleTextSize,
+        setMiddleTextSize,
+        tmx,
+        setTMX,
+        tmy,
+        setTMY,
+        defaultMiddleY,
+        textMiddle,
+        setTextMiddle,
       }}
     >
       {children}

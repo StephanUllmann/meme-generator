@@ -2,6 +2,7 @@ import { Box, TextField, Button, Grid, Slider } from "@mui/material";
 import { MuiFileInput } from "mui-file-input";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
+import { MuiColorInput } from "mui-color-input";
 import { useContext } from "react";
 import { MemeContext } from "../contexts/MemeContext";
 
@@ -31,9 +32,25 @@ export default function Controls() {
     defaultX,
     defaultTopY,
     defaultBottomY,
+    defaultColor,
+    colorTop,
+    setColorTop,
+    colorMiddle,
+    setColorMiddle,
+    colorBottom,
+    setColorBottom,
+    middleTextSize,
+    setMiddleTextSize,
+    tmx,
+    setTMX,
+    tmy,
+    setTMY,
+    defaultMiddleY,
+    setTextMiddle,
   } = useContext(MemeContext);
 
   const textTopEl = document.getElementById("text-top");
+  const textMiddleEl = document.getElementById("text-middle");
   const textBottomEl = document.getElementById("text-bottom");
 
   const fileName = file
@@ -42,6 +59,7 @@ export default function Controls() {
 
   const handleInput = ({ target }) => {
     if (target.id === "text-top") setTextTop(target.value);
+    if (target.id === "text-middle") setTextMiddle(target.value);
     if (target.id === "text-bottom") setTextBottom(target.value);
   };
 
@@ -57,14 +75,23 @@ export default function Controls() {
     setRandomizeMeme(true);
     setTextTop("");
     setTopTextSize(defaultTextSize);
+    setTextMiddle("");
+    setMiddleTextSize(defaultTextSize);
     setBottomTextSize(defaultTextSize);
     setTextBottom("");
     textTopEl.value = "";
+    textMiddleEl.value = "";
     textBottomEl.value = "";
+
     setTTX(defaultX);
     setTTY(defaultTopY);
+    setTMX(defaultX);
+    setTMY(defaultMiddleY);
     setTBX(defaultX);
     setTBY(defaultBottomY);
+    setColorBottom(defaultColor);
+    setColorMiddle(defaultColor);
+    setColorTop(defaultColor);
   };
 
   const handleFileInput = (newFile) => setFile(newFile);
@@ -79,9 +106,12 @@ export default function Controls() {
     const slider = e.target.name;
     const value = e.target.value;
     if (slider === "text-top-size") setTopTextSize(value);
-    if (slider === "text-bottom-size") setBottomTextSize(value);
     if (slider === "text-top-posX") setTTX(value);
     if (slider === "text-top-posY") setTTY(value);
+    if (slider === "text-middle-size") setMiddleTextSize(value);
+    if (slider === "text-middle-posX") setTMX(value);
+    if (slider === "text-middle-posY") setTMY(value);
+    if (slider === "text-bottom-size") setBottomTextSize(value);
     if (slider === "text-bottom-posX") setTBX(value);
     if (slider === "text-bottom-posY") setTBY(value);
   };
@@ -149,8 +179,76 @@ export default function Controls() {
                 name="text-top-posY"
                 onChange={handleSlider}
                 max={95}
+              />
+            </Grid>
+            <Grid item>
+              <MuiColorInput
+                id="color-top"
+                value={colorTop}
+                onChange={(color) => setColorTop(color)}
+              />
+            </Grid>
+          </Grid>
 
-                // onKeyDown={preventHorizontalKeyboardNavigation}
+          <Grid container marginBottom={5}>
+            <Grid item>
+              <TextField
+                label="Text Middle"
+                id="text-middle"
+                onChange={handleInput}
+                // multiline
+                maxRows={4}
+                onKeyDown={handleKeydown}
+                color="secondary"
+              />
+            </Grid>
+            <Grid item width={100}>
+              <Slider
+                label="size"
+                aria-label="Temperature"
+                value={middleTextSize}
+                // getAriaValueText="something"
+                color="secondary"
+                id="text-middle-size"
+                name="text-middle-size"
+                onChange={handleSlider}
+              />
+              <Slider
+                label="Position-X"
+                aria-label="Temperature"
+                value={tmx}
+                // getAriaValueText="something"
+                color="warning"
+                id="text-middle-posX"
+                name="text-middle-posX"
+                onChange={handleSlider}
+              />
+            </Grid>
+            <Grid item>
+              <Slider
+                label="Position-Y"
+                sx={{
+                  '& input[type="range"]': {
+                    WebkitAppearance: "slider-vertical",
+                  },
+                }}
+                orientation="vertical"
+                // defaultValue={tty}
+                value={tmy}
+                aria-label="Temperature"
+                // valueLabelDisplay="auto"
+                color="error"
+                id="text-middle-posY"
+                name="text-middle-posY"
+                onChange={handleSlider}
+                max={95}
+              />
+            </Grid>
+            <Grid item>
+              <MuiColorInput
+                id="color-middle"
+                value={colorMiddle}
+                onChange={(color) => setColorMiddle(color)}
               />
             </Grid>
           </Grid>
@@ -205,6 +303,13 @@ export default function Controls() {
                 onChange={handleSlider}
                 max={95}
                 // onKeyDown={preventHorizontalKeyboardNavigation}
+              />
+            </Grid>
+            <Grid item>
+              <MuiColorInput
+                id="color-top"
+                value={colorBottom}
+                onChange={(color) => setColorBottom(color)}
               />
             </Grid>
           </Grid>
