@@ -5,6 +5,7 @@ import { Card, CardMedia, Typography } from "@mui/material";
 
 export default function Meme() {
   const {
+    memeArr,
     randomMeme,
     textTop,
     textBottom,
@@ -25,18 +26,18 @@ export default function Meme() {
     textMiddle,
   } = useContext(MemeContext);
 
-  const url = imageURL || randomMeme.url;
-  const name = file?.name || randomMeme.name;
+  const url = imageURL || memeArr[randomMeme]?.url;
+  const name = file?.name || memeArr[randomMeme]?.name;
   const imgWidth = imageURL
     ? 500
-    : // : randomMeme.height > 700
-      // ? randomMeme.width * 0.66
-      randomMeme.width;
+    : // : memeArr[randomMeme].height > 700
+      // ? memeArr[randomMeme].width * 0.66
+      memeArr[randomMeme]?.width;
   const imgHeight = imageURL
     ? 500
-    : // : randomMeme.height > 700
-      // ? randomMeme.height * 0.66
-      randomMeme.height;
+    : // : memeArr[randomMeme].height > 700
+      // ? memeArr[randomMeme].height * 0.66
+      memeArr[randomMeme]?.height;
 
   const textBordersThick =
     "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black";

@@ -26,7 +26,7 @@ function App() {
         <Grid item>
           <Meme />
         </Grid>
-        <Grid item>
+        <Grid item width={"40%"}>
           <Controls />
         </Grid>
       </Grid>

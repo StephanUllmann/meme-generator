@@ -47,6 +47,8 @@ export default function Controls() {
     setTMY,
     defaultMiddleY,
     setTextMiddle,
+    setRandomMeme,
+    memeArr,
   } = useContext(MemeContext);
 
   const textTopEl = document.getElementById("text-top");
@@ -315,6 +317,7 @@ export default function Controls() {
           </Grid>
         </Box>
       </Grid>
+      {/* <Grid container flexWrap={true}> */}
       <Grid item>
         <MuiFileInput
           value={file}
@@ -325,25 +328,65 @@ export default function Controls() {
           sx={{ width: 220, transform: "translateX(10px)" }}
         />
       </Grid>
-      <Grid item>
-        <Button
-          onClick={randomize}
-          variant="contained"
-          color="warning"
-          sx={{ width: 220, transform: "translateX(10px)" }}
-        >
-          Random Meme
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          onClick={download}
-          variant="outlined"
-          color="success"
-          sx={{ width: 220, transform: "translateX(10px)" }}
-        >
-          Download Meme
-        </Button>
+      <Grid container flexWrap={true}>
+        <Grid item>
+          <Button
+            onClick={randomize}
+            variant="contained"
+            color="warning"
+            sx={{ width: 220, transform: "translateX(10px)" }}
+          >
+            Random Meme
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            onClick={download}
+            variant="outlined"
+            color="success"
+            sx={{ width: 220, transform: "translateX(10px)" }}
+          >
+            Download Meme
+          </Button>
+        </Grid>
+        <Grid container flexWrap={true}>
+          <Grid item>
+            <Button
+              onClick={() =>
+                setRandomMeme((prev) => {
+                  if (prev === 99) {
+                    return 0;
+                  } else {
+                    return prev + 1;
+                  }
+                })
+              }
+              variant="outlined"
+              color="success"
+              sx={{ width: 220, transform: "translateX(10px)" }}
+            >
+              next
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() =>
+                setRandomMeme((prev) => {
+                  if (prev === 0) {
+                    return memeArr.length - 1;
+                  } else {
+                    return prev - 1;
+                  }
+                })
+              }
+              variant="outlined"
+              color="success"
+              sx={{ width: 220, transform: "translateX(10px)" }}
+            >
+              previous
+            </Button>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -7,7 +7,7 @@ export default function MemeContextProvider({ children }) {
   const defaultTextSize = 30;
 
   const [memeArr, setMemeArr] = useState([]);
-  const [randomMeme, setRandomMeme] = useState("");
+  const [randomMeme, setRandomMeme] = useState(0);
   const [randomizeMeme, setRandomizeMeme] = useState(false);
   const [textTop, setTextTop] = useState("");
   const [textMiddle, setTextMiddle] = useState("");
@@ -43,7 +43,7 @@ export default function MemeContextProvider({ children }) {
       .then((data) => {
         if (data.success) {
           setMemeArr(data.data.memes);
-          setRandomMeme(data.data.memes[Math.floor(Math.random() * 100)]);
+          setRandomMeme(Math.floor(Math.random() * 100));
         }
         if (!data.success) throw new Error("no success");
       })
@@ -60,7 +60,7 @@ export default function MemeContextProvider({ children }) {
     else if (randomizeMeme) {
       const randomIndex = Math.floor(Math.random() * memeArr.length);
       // console.log(randomIndex);
-      setRandomMeme(memeArr[randomIndex]);
+      setRandomMeme(randomIndex);
     }
     setRandomizeMeme(false);
   }, [randomizeMeme, memeArr]);
@@ -118,6 +118,7 @@ export default function MemeContextProvider({ children }) {
         defaultMiddleY,
         textMiddle,
         setTextMiddle,
+        setRandomMeme,
       }}
     >
       {children}
