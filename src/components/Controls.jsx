@@ -57,7 +57,7 @@ export default function Controls() {
 
   const fileName = file
     ? `${file.name}-${textTop}`
-    : `${randomMeme.name}-${textTop}`;
+    : `${memeArr[randomMeme]?.name}-${textTop}`;
 
   const handleInput = ({ target }) => {
     if (target.id === "text-top") setTextTop(target.value);
