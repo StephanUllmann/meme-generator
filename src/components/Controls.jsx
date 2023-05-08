@@ -354,24 +354,6 @@ export default function Controls() {
             <Button
               onClick={() =>
                 setRandomMeme((prev) => {
-                  if (prev === 99) {
-                    return 0;
-                  } else {
-                    return prev + 1;
-                  }
-                })
-              }
-              variant="outlined"
-              color="success"
-              sx={{ width: 220, transform: "translateX(10px)" }}
-            >
-              next
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button
-              onClick={() =>
-                setRandomMeme((prev) => {
                   if (prev === 0) {
                     return memeArr.length - 1;
                   } else {
@@ -384,6 +366,24 @@ export default function Controls() {
               sx={{ width: 220, transform: "translateX(10px)" }}
             >
               previous
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              onClick={() =>
+                setRandomMeme((prev) => {
+                  if (prev === 99) {
+                    return 0;
+                  } else {
+                    return prev + 1;
+                  }
+                })
+              }
+              variant="outlined"
+              color="success"
+              sx={{ width: 220, transform: "translateX(10px)" }}
+            >
+              next
             </Button>
           </Grid>
         </Grid>
