@@ -33,7 +33,7 @@ export default function MemeContextProvider({ children }) {
   const [tby, setTBY] = useState(defaultBottomY);
 
   // Color
-  const defaultColor = "#fff";
+  const defaultColor = "rgb(255, 255, 255)";
   const [colorTop, setColorTop] = useState(defaultColor);
   const [colorMiddle, setColorMiddle] = useState(defaultColor);
   const [colorBottom, setColorBottom] = useState(defaultColor);

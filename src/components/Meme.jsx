@@ -38,6 +38,11 @@ export default function Meme() {
       // ? randomMeme.height * 0.66
       randomMeme.height;
 
+  const textBordersThick =
+    "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black";
+  const textBordersThin =
+    "0.5px 0.5px 0 black, -0.5px 0.5px 0 black, -0.5px -0.5px 0 black, 0.5px -0.5px 0 black";
+
   return (
     <Card sx={{ position: "relative" }} id="meme">
       <CardMedia
@@ -59,7 +64,9 @@ export default function Meme() {
           textTransform: "uppercase",
           color: colorTop,
           textShadow:
-            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+            colorTop === "rgb(255, 255, 255)"
+              ? textBordersThick
+              : textBordersThin,
           left: `${ttx}%`,
           transform: "translateX(-50%)",
           textAlign: "center",
@@ -86,7 +93,9 @@ export default function Meme() {
           textTransform: "uppercase",
           color: colorMiddle,
           textShadow:
-            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+            colorMiddle === "rgb(255, 255, 255)"
+              ? textBordersThick
+              : textBordersThin,
           left: `${tmx}%`,
           transform: "translateX(-50%)",
           textAlign: "center",
@@ -114,7 +123,9 @@ export default function Meme() {
           textTransform: "uppercase",
           color: colorBottom,
           textShadow:
-            "1.25px 1.25px 0 black, -1.25px 1.25px 0 black, -1.25px -1.25px 0 black, 1.25px -1.25px 0 black",
+            colorBottom === "rgb(255, 255, 255)"
+              ? textBordersThick
+              : textBordersThin,
           left: `${tbx}%`,
           transform: "translateX(-50%)",
           textAlign: "center",
